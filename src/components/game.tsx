@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import { ConnectFourGame } from '../../ConnectFourGame';
 import GameConfig from './gameConfig';
-import './Game.css';
 
 interface PlayerConfig {
   id: number;
