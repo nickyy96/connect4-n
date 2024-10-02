@@ -48,7 +48,7 @@ const GameConfig: React.FC<GameConfigProps> = ({ onStartGame }) => {
   };
 
   return (
-    <div className="p-6 bg-slate-400 rounded-lg shadow-lg flex flex-col items-center w-1/3 md:w-full">
+    <div className="p-6 bg-slate-400 rounded-lg shadow-lg flex flex-col items-center w-full lg:w-1/3">
       <h2 className="text-2xl font-bold text-gray-800 mb-4">Configure Game</h2>
       <div className="space-y-4 text-gray-800">
         <label className="block">
