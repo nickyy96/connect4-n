@@ -13,6 +13,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <title>Connect 4</title>
+      </head>
       <body>
         {children}
       </body>
