@@ -15,6 +15,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <title>Connect 4</title>
+        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
       </head>
       <body>
         {children}
