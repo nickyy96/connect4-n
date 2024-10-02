@@ -13,7 +13,7 @@ interface PlayerConfig {
 const Game: React.FC = () => {
   const [game, setGame] = useState<ConnectFourGame | null>(null);
   const [board, setBoard] = useState<number[][]>([]);
-  const [_, setCurrentPlayer] = useState(1);
+  const [, setCurrentPlayer] = useState(1);
   const [message, setMessage] = useState('');
   const [players, setPlayers] = useState<PlayerConfig[]>([]);
 
