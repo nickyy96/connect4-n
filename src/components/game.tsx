@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { ConnectFourGame } from '../../ConnectFourGame';
 import GameConfig from './gameConfig';
+import './Game.css';
 
 interface PlayerConfig {
   id: number;
@@ -12,6 +13,7 @@ interface PlayerConfig {
 const Game: React.FC = () => {
   const [game, setGame] = useState<ConnectFourGame | null>(null);
   const [board, setBoard] = useState<number[][]>([]);
+  const [currentPlayer, setCurrentPlayer] = useState(1);
   const [message, setMessage] = useState('');
   const [players, setPlayers] = useState<PlayerConfig[]>([]);
 
@@ -23,6 +25,7 @@ const Game: React.FC = () => {
     const newGame = new ConnectFourGame(numRows, numCols, playerConfigs.length);
     setGame(newGame);
     setBoard(newGame.board);
+    setCurrentPlayer(newGame.currentPlayer);
     setMessage(`Player ${newGame.currentPlayer}'s turn`);
     setPlayers(playerConfigs);
   };
@@ -31,9 +34,12 @@ const Game: React.FC = () => {
     if (game && !game.gameOver) {
       const moveMade = game.makeMove(colIndex);
       if (moveMade) {
-        setBoard([...game.board]); // update board state
+        setBoard([...game.board]); // Update board state
         if (game.gameOver) {
           if (game.winner) {
+            const winnerColor = players.find(
+              (p) => p.id === game.winner
+            )?.color;
             setMessage(
               `Player ${game.winner} wins!`
             );
@@ -41,6 +47,7 @@ const Game: React.FC = () => {
             setMessage('Game is a draw.');
           }
         } else {
+          setCurrentPlayer(game.currentPlayer);
           setMessage(`Player ${game.currentPlayer}'s turn`);
         }
       } else {
@@ -52,6 +59,7 @@ const Game: React.FC = () => {
   const startNewGame = () => {
     setGame(null);
     setBoard([]);
+    setCurrentPlayer(1);
     setMessage('');
     setPlayers([]);
   };
@@ -70,7 +78,7 @@ const Game: React.FC = () => {
       <div className="board grid grid-cols-7 gap-1">
         {board.slice().reverse().map((row, rowIndex) => (
           <div key={rowIndex} className="row flex justify-center gap-1">
-            {row.map((_, colIndex) => {
+            {row.map((cell, colIndex) => {
               const adjustedRowIndex = board.length - 1 - rowIndex;
               const cellValue = board[adjustedRowIndex][colIndex];
               const playerColor = players.find(p => p.id === cellValue)?.color || 'transparent';
